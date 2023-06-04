@@ -16,7 +16,7 @@ public class Lab_Plinko {
 
         int randomIndex = (int)(Math.random() * slots.length);
         slots[randomIndex]++;
-        
+
         System.out.println();
     }
     
@@ -30,20 +30,22 @@ public class Lab_Plinko {
     }
 
     public static void main(String[] args) {
-        // most of the program, handles user input
-        // make appropriate calls to dropMarble and printBoard 
         Scanner input = new Scanner(System.in);
 
         System.out.println("Welcome to Plinko!");
         System.out.println("How many slots in the board?");
         
         int numSlots = input.nextInt();
+        while (numSlots <= 0) {
+            System.out.println("That's a bad number! Try again with another number.");
+            numSlots = input.nextInt();
+        }
         int[] slots = new int[numSlots];
 
         System.out.println("How many marbles to drop?");
         int numBallDrop = input.nextInt();
 
-        while (numBallDrop != 0) { 
+        while (numBallDrop != 0 && numBallDrop >= 0) { 
             do {
                 dropMarble(slots);
                 numBallDrop--;
@@ -53,7 +55,8 @@ public class Lab_Plinko {
             System.out.println("How many balls to drop?");
             numBallDrop = input.nextInt();
 
-            if (numBallDrop == 0) {
+            if (numBallDrop <= 0) {
+                // program quits when a negative number or zero is entered.
                 System.out.println("That's the end!");
                 input.close();
             }
